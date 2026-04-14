@@ -1,0 +1,28 @@
+# Временные файлы Visual Studio
+**/.vs/
+**/out/
+**/build/
+
+# Результаты сборки
+**/bin/
+**/obj/
+**/x64/
+**/x86/
+**/Debug/
+**/Release/
+
+# Файлы пользователя
+*.user
+*.suo
+*.db
+*.opendb
+
+# Логи и временные файлы компилятора
+*.log
+*.tlog
+*.lastbuildstate
+*.recipe
+*.ilk
+*.pdb
+*.exe
+*.obj

@@ -1,0 +1,36 @@
+Villarreal; Vila-real; 8; 1; 28
+Newcastle; Newcastle; 8; 14; 26
+Leverkusen; Leverkusen; 8; 12; 27
+Real Madrid; Madrid; 8; 15; 28
+Atleti; Madrid; 8; 13; 23
+Sporting CP; Lisbon; 8; 16; 25
+Ajax; Amsterdam; 8; 6; 27
+Club Brugge; Bruges; 8; 10; 28
+Man City; Manchester; 8; 16; 27
+Bodø/Glimt; Bodø; 8; 9; 25
+Kairat Almaty; Almaty; 8; 1; 26
+Arsenal; London; 8; 24; 24
+Olympiacos; Piraeus; 8; 11; 29
+Juventus; Turin; 8; 13; 25
+Slavia Praha; Prague; 8; 3; 29
+Bayern München; Munich; 8; 21; 24
+PSV; Eindhoven; 8; 8; 25
+Galatasaray; Istanbul; 8; 10; 29
+Monaco; Monaco; 8; 10; 28
+Paris Saint-Germain; Paris; 8; 14; 24
+Inter; Milan; 8; 15; 24
+Qarabağ; Baku; 8; 10; 26
+Atalanta; Bergamo; 8; 13; 24
+Marseille; Marseille; 8; 9; 24
+B. Dortmund; Dortmund; 8; 11; 26
+Benfica; Lisbon; 8; 9; 28
+Union SG; Brussels; 8; 9; 27
+Athletic Club; Bilbao; 8; 8; 28
+Copenhagen; Copenhagen; 8; 8; 28
+Chelsea; London; 8; 16; 31
+Liverpool; Liverpool; 8; 18; 28
+Pafos; Paphos; 8; 9; 28
+Barcelona; Barcelona; 8; 16; 24
+Frankfurt; Frankfurt; 8; 4; 29
+Tottenham; London; 8; 17; 28
+Napoli; Naples; 8; 8; 26
