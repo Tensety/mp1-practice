@@ -13,6 +13,7 @@ struct Team {
 };
 
 std::vector<Team> read_file(const std::string& file_name);
-void find_winner(std::vector<Team>& teams);
+std::vector<Team> find_winner(const std::vector<Team>& football);
+void print_results(const std::vector<Team>& winners);
 
 #endif

@@ -2,18 +2,29 @@
 #include <stdlib.h>
 #include "teams.h"
 
-int main() {
-	char file_name[64];
-	printf("Enter file name: ");
-	scanf("%s", file_name);
-	int count = team_amount(file_name);
+int main(int argc, char** argv) {
+	if (argc < 2) {
+		printf("Incorrent number of arguments");
+		return 1;
+	}
 
-	Team* teams = (Team*)malloc(count * sizeof(Team));
-	read_file(count, teams, file_name);
+	TeamList* football = NULL;
+	const char* file_name = argv[1];
 
-	find_winner(teams, count);
+	football = malloc(sizeof(TeamList));
+	football->count = team_amount(file_name);
+	football->teams = malloc(football->count * sizeof(Team));
 
-	free(teams);
+	read_file(football, file_name);
+
+	TeamList* winners = find_winner(football);
+
+	print_results(winners);
+
+	free(winners->teams);
+	free(winners);
+	free(football->teams);
+	free(football);
 
 	return 0;
 }

@@ -21,58 +21,79 @@ int team_amount(const char* file_name) {
 }
 
 
-void read_file(int count, Team* teams, char* file_name) {
+void read_file(TeamList* football, const char* file_name) {
 	char buf[2048];
+	int i;
 	FILE* file = fopen(file_name, "r");
 
-	int i;
-	for (i = 0; i < count; i++) {
+	if (!file) {
+		printf("Didn't find file: %s\n", file_name);
+		return 1;
+	}
+
+	for (i = 0; i < football->count; i++) {
+		char* next_token = NULL;
 		fgets(buf, sizeof(buf), file);
 		buf[strcspn(buf, "\n")] = "\0";
-
-		char* next_token = NULL;
-
-		strcpy(teams[i].name, strtok_s(buf, ";", &next_token));
-		strcpy(teams[i].city, strtok_s(NULL, ";", &next_token));
-		teams[i].games_played = atoi(strtok_s(NULL, ";", &next_token));
-		teams[i].points = atoi(strtok_s(NULL, ";", &next_token));
-		teams[i].players = atoi(strtok_s(NULL, ";", &next_token));
+		strcpy(football->teams[i].name, strtok_s(buf, ";", &next_token));
+		strcpy(football->teams[i].city, strtok_s(NULL, ";", &next_token));
+		football->teams[i].games_played = atoi(strtok_s(NULL, ";", &next_token));
+		football->teams[i].points = atoi(strtok_s(NULL, ";", &next_token));
+		football->teams[i].players = atoi(strtok_s(NULL, ";", &next_token));
 	}
 	fclose(file);
 }
 
 
-void find_winner(Team* teams, int count) {
-	int i, j, mx = 0;
-	for (i = 0; i < count - 1; i++) {
-		mx = i;
+TeamList* find_winner(TeamList* football) {
+	int i, j = 0, count_win = 0, mx = football->teams[0].points;
+	
+	for (i = 1; i < football->count; i++)
+		if (football->teams[i].points > mx)
+			mx = football->teams[i].points;
 
-		for (j = i + 1; j < count; j++)
-			if (teams[j].points > teams[mx].points)
-				mx = j;
+	for (i = 0; i < football->count; i++)
+		if (football->teams[i].points == mx)
+			count_win++;
 
-		if (mx != i) {
-			Team temp = teams[i];
-			teams[i] = teams[mx];
-			teams[mx] = temp;
+	TeamList* winners = malloc(sizeof(TeamList));
+	winners->teams = malloc(count_win * sizeof(Team));
+	winners->count = count_win;
+
+	for (i = 0; i < football->count; i++) {
+		if (football->teams[i].points == mx) {
+			strcpy(winners->teams[j].name, football->teams[i].name);
+			strcpy(winners->teams[j].city, football->teams[i].city);
+			winners->teams[j].games_played = football->teams[i].games_played;
+			winners->teams[j].points = football->teams[i].points;
+			winners->teams[j].players = football->teams[i].players;
+			j++;
 		}
 	}
 
-	printf("\nWINNER: 1. %s; %s; %d; %d; %d\n\n",
-		teams[0].name,
-		teams[0].city,
-		teams[0].games_played,
-		teams[0].points,
-		teams[0].players
-	);
+	return winners;
+}
 
-	for (i = 1; i < count; i++)
-		printf("%d. %s; %s; %d; %d; %d\n",
-			i + 1,
-			teams[i].name,
-			teams[i].city,
-			teams[i].games_played,
-			teams[i].points,
-			teams[i].players
+void print_results(TeamList* winners) {
+	int i;
+	if (winners->count == 1)
+		printf("WINNER: %s; %s; %d; %d; %d;\n\n",
+			winners->teams[0].name,
+			winners->teams[0].city,
+			winners->teams[0].games_played,
+			winners->teams[0].points,
+			winners->teams[0].players
 		);
+	else {
+		printf("WINNERS:\n");
+		for (i = 0; i < winners->count; i++)
+			printf("%d. %s; %s; %d; %d; %d;\n",
+				i + 1,
+				winners->teams[i].name,
+				winners->teams[i].city,
+				winners->teams[i].games_played,
+				winners->teams[i].points,
+				winners->teams[i].players
+			);
+	}
 }
